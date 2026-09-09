@@ -18,9 +18,9 @@ export default function WholesaleInvitation() {
           </h2>
 
           <p className="mt-8 text-ivory/50 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            Whether you&apos;re looking to stock our range or explore custom
-            manufacturing, we&apos;d love to discuss how INTENSE can support
-            your retail business.
+            Looking to stock premium menswear that your customers will love?
+            We&apos;d love to discuss how INTENSE can be part of your retail
+            collection.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">

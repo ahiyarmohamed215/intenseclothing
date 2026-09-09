@@ -133,3 +133,71 @@ body.scroll-locked {
 .arrow-link:hover .arrow-icon {
   transform: translateX(6px);
 }
+
+/* ─── Custom Select Dropdowns ─── */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23A7977B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  padding-right: 36px;
+  cursor: pointer;
+}
+select:focus {
+  border-color: var(--color-ink);
+}
+select option {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+  padding: 8px;
+}
+
+/* ─── Marquee / Ticker ─── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
+
+/* ─── Gentle float ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ─── Stagger fade for children ─── */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.stagger-children.is-visible > * {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.stagger-children.is-visible > *:nth-child(1) { transition-delay: 0s; }
+.stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.2s; }
+.stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.3s; }
+.stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.4s; }
+.stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.5s; }
+
+/* ─── Horizontal rule animation ─── */
+.hr-reveal {
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.hr-reveal.is-visible {
+  width: 100%;
+}

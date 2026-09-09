@@ -160,7 +160,7 @@ export default function Footer() {
           </p>
           {siteConfig.marketingBy && (
             <p className="text-xs text-ivory/20">
-              Marketing by{' '}
+              Developed by{' '}
               <a
                 href={`https://${siteConfig.marketingBy.url.replace(/^https?:\/\//, '')}`}
                 target="_blank"

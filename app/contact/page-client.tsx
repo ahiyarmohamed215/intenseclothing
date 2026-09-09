@@ -9,7 +9,7 @@ const enquiryTypes = [
   'General Enquiry',
   'Wholesale / Retail Partnership',
   'Product Information',
-  'Custom Manufacturing',
+  'Bulk Order',
   'Other',
 ];
 
