@@ -1,13 +1,60 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { products } from '@/src/data/products';
 
 export default function FeaturedProducts() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    let ctx: unknown;
+    import('@/src/lib/gsap').then(({ gsap, ScrollTrigger }) => {
+      ctx = gsap.context(() => {
+        /* Heading */
+        gsap.from('.feat-heading', {
+          x: -50,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '.feat-heading', start: 'top 85%', once: true },
+        });
+
+        /* Product cards — staggered rise with slight rotation */
+        gsap.utils.toArray<HTMLElement>('.product-card').forEach((card, i) => {
+          gsap.from(card, {
+            y: 60,
+            opacity: 0,
+            rotate: 1.5,
+            duration: 0.8,
+            delay: i * 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              once: true,
+            },
+          });
+        });
+      }, sectionRef);
+    });
+
+    return () => {
+      if (ctx && typeof (ctx as { revert: () => void }).revert === 'function') {
+        (ctx as { revert: () => void }).revert();
+      }
+    };
+  }, []);
+
   return (
-    <section className="py-20 md:py-32" aria-labelledby="featured-heading">
+    <section ref={sectionRef} className="py-20 md:py-32" aria-labelledby="featured-heading">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16">
         <div className="flex items-end justify-between mb-12">
-          <div>
+          <div className="feat-heading">
             <p className="label-sm text-taupe mb-3">Featured</p>
             <h2 id="featured-heading" className="font-editorial text-3xl md:text-4xl lg:text-5xl">
               Our Products
@@ -29,7 +76,7 @@ export default function FeaturedProducts() {
             <Link
               key={product.slug}
               href={`/collections/${product.slug}`}
-              className="group"
+              className="product-card group"
             >
               <div className="product-image-wrap aspect-[3/4] relative bg-ink/5 mb-4">
                 <Image
@@ -39,6 +86,12 @@ export default function FeaturedProducts() {
                   className="object-cover"
                   sizes="(max-width: 768px) 50vw, 25vw"
                 />
+                {/* Hover overlay with "View" */}
+                <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-colors duration-400 flex items-center justify-center">
+                  <span className="text-white text-xs tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                    View Product
+                  </span>
+                </div>
               </div>
               <p className="label-sm text-taupe mb-1">{product.category}</p>
               <h3 className="text-sm md:text-base font-medium group-hover:text-orange transition-colors">

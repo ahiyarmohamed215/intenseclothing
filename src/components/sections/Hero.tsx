@@ -158,9 +158,9 @@ export default function Hero() {
 
       {/* Bottom marquee ticker */}
       <div className="absolute bottom-0 left-0 right-0 z-10 bg-ink/40 backdrop-blur-sm py-2.5 overflow-hidden">
-        <div className="animate-marquee whitespace-nowrap flex">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i} className="flex items-center gap-8 text-[10px] tracking-[0.25em] uppercase text-ivory/40 mr-8">
+        <div className="animate-marquee flex" style={{ minWidth: '200%', width: 'max-content' }}>
+          {Array.from({ length: 4 }).map((_, i) => (
+            <span key={i} className="flex items-center shrink-0 gap-6 px-4 text-[10px] tracking-[0.25em] uppercase text-ivory/40">
               <span>Premium Menswear</span>
               <span className="text-orange/60">●</span>
               <span>Since 2004</span>

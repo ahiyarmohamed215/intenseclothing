@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 
 export default function BrandStatement() {
   const sectionRef = useRef<HTMLElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -12,19 +13,53 @@ export default function BrandStatement() {
     let ctx: unknown;
     import('@/src/lib/gsap').then(({ gsap, ScrollTrigger }) => {
       ctx = gsap.context(() => {
+        /* Staggered line reveals with clip-path */
         gsap.utils.toArray<HTMLElement>('.brand-line').forEach((line, i) => {
           gsap.from(line, {
-            y: 40,
+            y: 50,
             opacity: 0,
-            duration: 0.8,
-            delay: i * 0.12,
-            ease: 'power2.out',
+            duration: 0.9,
+            delay: i * 0.15,
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: line,
               start: 'top 88%',
               once: true,
             },
           });
+        });
+
+        /* Animated year counter */
+        if (counterRef.current) {
+          const target = { val: 0 };
+          gsap.to(target, {
+            val: new Date().getFullYear() - 2004,
+            duration: 2,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: counterRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+            onUpdate: () => {
+              if (counterRef.current) {
+                counterRef.current.textContent = Math.round(target.val) + '+';
+              }
+            },
+          });
+        }
+
+        /* Orange accent bar grow */
+        gsap.from('.brand-accent-bar', {
+          scaleX: 0,
+          transformOrigin: 'center center',
+          duration: 1.5,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.brand-accent-bar',
+            start: 'top 90%',
+            once: true,
+          },
         });
       }, sectionRef);
     });
@@ -39,12 +74,27 @@ export default function BrandStatement() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 md:py-36 bg-ink"
+      className="py-24 md:py-36 bg-ink relative overflow-hidden"
       aria-labelledby="brand-statement"
     >
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16">
+      {/* Subtle background texture lines */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: 'repeating-linear-gradient(90deg, #fff 0px, #fff 1px, transparent 1px, transparent 80px)',
+      }} />
+
+      <div className="mx-auto max-w-[1440px] px-5 md:px-10 lg:px-16 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="label-sm text-taupe mb-8 brand-line">Since 2004</p>
+          {/* Stat */}
+          <div className="brand-line flex items-center justify-center gap-6 mb-10">
+            <div className="h-px w-12 bg-taupe/30" />
+            <div className="text-center">
+              <span ref={counterRef} className="block text-4xl md:text-5xl font-editorial text-orange">
+                {new Date().getFullYear() - 2004}+
+              </span>
+              <span className="label-sm text-ivory/30 mt-1">Years of Craft</span>
+            </div>
+            <div className="h-px w-12 bg-taupe/30" />
+          </div>
 
           <h2
             id="brand-statement"
@@ -63,7 +113,8 @@ export default function BrandStatement() {
             expert stitching, each piece is made to be worn with confidence.
           </p>
 
-          <div className="divider mx-auto max-w-24 mt-12 bg-taupe/30 brand-line" />
+          {/* Accent bar */}
+          <div className="brand-accent-bar mx-auto max-w-24 mt-12 h-[2px] bg-orange/60" />
         </div>
       </div>
     </section>

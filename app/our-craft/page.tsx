@@ -84,8 +84,8 @@ export default function OurCraftPage() {
         <div className="text-center mt-20 md:mt-28">
           <div className="divider mx-auto max-w-16 mb-10" />
           <p className="text-ink/40 text-sm mb-6 max-w-md mx-auto">
-            Interested in learning more about our manufacturing capabilities
-            or discussing a wholesale partnership?
+            Interested in stocking INTENSE products or discussing a
+            wholesale partnership?
           </p>
           <Link
             href="/contact?type=wholesale"

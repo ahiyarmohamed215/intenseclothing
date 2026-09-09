@@ -18,34 +18,33 @@ export default function Logo({
   taglineColor = '#1A1A1A',
   className = '',
 }: LogoProps) {
-  const viewBoxHeight = showTagline ? 100 : 68;
-  const aspectRatio = 400 / viewBoxHeight;
-  const width = height * aspectRatio;
+  /* Compact proportions — ~3:1 ratio instead of 6:1 */
+  const viewBoxHeight = showTagline ? 120 : 80;
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 400 ${viewBoxHeight}`}
-      width={width}
+      viewBox={`0 0 260 ${viewBoxHeight}`}
       height={height}
       className={className}
+      style={{ width: 'auto' }}
       role="img"
       aria-label="INTENSE — Ultra Modern Design"
     >
       {/* Orange rectangle (left half) */}
-      <rect x="0" y="0" width="218" height="68" fill="#FF6500" />
+      <rect x="0" y="0" width="142" height="80" fill="#FF6500" />
       {/* Black rectangle (right half) */}
-      <rect x="218" y="0" width="182" height="68" fill="#1A1A1A" />
+      <rect x="142" y="0" width="118" height="80" fill="#1A1A1A" />
 
-      {/* INTENSE text — light-weight, wide-tracked, spanning both halves */}
+      {/* INTENSE text — spanning both halves */}
       <text
-        x="200"
-        y="49"
+        x="130"
+        y="56"
         textAnchor="middle"
         fontFamily="'Inter', 'Helvetica Neue', Arial, sans-serif"
         fontWeight="300"
-        fontSize="42"
-        letterSpacing="8"
+        fontSize="40"
+        letterSpacing="6"
         fill="white"
       >
         INTENSE
@@ -54,13 +53,13 @@ export default function Logo({
       {/* Tagline (only when showTagline is true) */}
       {showTagline && (
         <text
-          x="200"
-          y="92"
+          x="130"
+          y="106"
           textAnchor="middle"
           fontFamily="'Inter', 'Helvetica Neue', Arial, sans-serif"
           fontWeight="400"
-          fontSize="13"
-          letterSpacing="5"
+          fontSize="11"
+          letterSpacing="4"
           fill={taglineColor}
         >
           ULTRA · MODERN DESIGN
