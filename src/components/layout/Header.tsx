@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import MobileMenu from './MobileMenu';
+import Logo from '@/src/components/ui/Logo';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -50,15 +51,9 @@ export default function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className={`flex items-center gap-2 ${textColor} transition-colors duration-300`}
               aria-label="INTENSE Clothing — Home"
             >
-              <span className="text-xl md:text-2xl font-bold tracking-tight">
-                INTENSE
-              </span>
-              <span className="hidden sm:inline text-[10px] tracking-[0.2em] uppercase opacity-60">
-                Clothing
-              </span>
+              <Logo height={32} className="md:h-[38px]" />
             </Link>
 
             {/* Desktop Navigation */}

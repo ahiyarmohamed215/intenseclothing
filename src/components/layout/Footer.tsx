@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { siteConfig } from '@/src/config/site';
+import Logo from '@/src/components/ui/Logo';
 
 const footerLinks = [
   { href: '/', label: 'Home' },
@@ -52,13 +53,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold text-ivory tracking-tight">
-                INTENSE
-              </span>
+              <Logo height={36} showTagline taglineColor="#A7977B" />
             </Link>
-            <p className="mt-1 text-[10px] tracking-[0.2em] uppercase text-taupe">
-              {siteConfig.tagline}
-            </p>
             <p className="mt-4 text-sm leading-relaxed text-ivory/50 max-w-xs">
               {siteConfig.description}
             </p>
