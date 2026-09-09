@@ -158,8 +158,14 @@ export default function Hero() {
 
       {/* Bottom marquee ticker */}
       <div className="absolute bottom-0 left-0 right-0 z-10 bg-ink/40 backdrop-blur-sm py-2.5 overflow-hidden">
-        <div className="animate-marquee flex" style={{ minWidth: '200%', width: 'max-content' }}>
-          {Array.from({ length: 4 }).map((_, i) => (
+        <div
+          className="flex"
+          style={{
+            width: 'max-content',
+            animation: 'marquee 30s linear infinite',
+          }}
+        >
+          {Array.from({ length: 6 }).map((_, i) => (
             <span key={i} className="flex items-center shrink-0 gap-6 px-4 text-[10px] tracking-[0.25em] uppercase text-ivory/40">
               <span>Premium Menswear</span>
               <span className="text-orange/60">●</span>
