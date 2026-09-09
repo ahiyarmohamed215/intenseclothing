@@ -1,0 +1,26 @@
+Right now, **yes, you do need to do a tiny bit of "coding" (data entry) to add a product.** 
+
+Because we built this as a lightning-fast, premium static site, we didn't connect a heavy database. Instead, your products are managed in a simple text file. 
+
+If you look at the file `src/data/products.ts` (which you currently have open), adding a product is as simple as copying and pasting a block of text and changing the details:
+
+### How to add a product right now:
+1. Put your new image in the `public/images/` folder (e.g., `new-shorts.jpg`).
+2. Open `src/data/products.ts` and add a new block to the list like this:
+```typescript
+  {
+    slug: 'new-premium-shorts',          // The URL link
+    name: 'New Premium Shorts',          // The title
+    category: 'Shorts',                  // The category
+    image: '/images/new-shorts.jpg',     // The image file name
+    description: 'A brief description of your new product.',
+  },
+```
+3. Save the file. The website will automatically update to show it on the collections page and create a dedicated page for it.
+
+### Do you want an easier way in the future?
+If you plan to add and remove products frequently and want a visual dashboard (like WordPress or Shopify) where you can just upload photos and type descriptions without looking at code, we would need to integrate a **CMS (Content Management System)** like Sanity, Contentful, or Shopify. 
+
+Since you are a manufacturer primarily looking for wholesale enquiries (and not doing a high volume of individual add-to-cart checkout sales), managing them in this simple data file is currently the fastest, cheapest, and most secure way to run the site. 
+
+*P.S. The marquee is now fully powered by GSAP animation instead of CSS, so it should be running perfectly smoothly across the bottom of the screen regardless of computer settings!*
