@@ -72,7 +72,32 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {products.map((product) => (
+          {[
+            {
+              slug: 'front-pocket-acid-wash-shorts',
+              name: 'Front Pocket Acid Wash Shorts',
+              category: 'Shorts',
+              image: '/images/product-front-pocket-shorts.jpg'
+            },
+            {
+              slug: 'mens-cotton-trousers',
+              name: "Men's Cotton Trousers",
+              category: 'Trousers',
+              image: '/images/product-cotton-trousers.jpg'
+            },
+            {
+              slug: 'cargo-pocket-acid-wash-shorts',
+              name: 'Cargo Pocket Acid Wash Shorts',
+              category: 'Shorts',
+              image: '/images/product-cargo-pocket-shorts.jpg'
+            },
+            {
+              slug: 'acid-wash-shorts',
+              name: 'Acid Wash Shorts',
+              category: 'Shorts',
+              image: '/images/product-acid-wash-shorts.jpg'
+            }
+          ].map((product) => (
             <Link
               key={product.slug}
               href={`/collections/${product.slug}`}

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -5,6 +6,7 @@ import Link from 'next/link';
 import { products, getProductBySlug, getRelatedProducts } from '@/src/data/products';
 import { siteConfig } from '@/src/config/site';
 import ProductCard from '@/src/components/products/ProductCard';
+import ProductDetailClient from '@/src/components/products/ProductDetailClient';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -52,56 +54,10 @@ export default async function ProductDetailPage({ params }: PageProps) {
           </ol>
         </nav>
 
-        {/* Product layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-          {/* Image */}
-          <div className="aspect-[3/4] relative bg-ink/5 overflow-hidden">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
-
-          {/* Details */}
-          <div className="flex flex-col justify-center">
-            <p className="label-sm text-taupe mb-3">{product.category}</p>
-            <h1 className="font-editorial text-3xl md:text-4xl lg:text-5xl mb-6">
-              {product.name}
-            </h1>
-            <p className="text-ink/60 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-              {product.description}
-            </p>
-
-            <div className="divider mb-8" />
-
-            {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                href={`/contact?product=${encodeURIComponent(product.name)}`}
-                className="inline-flex items-center justify-center px-7 py-3 bg-ink text-ivory text-xs tracking-[0.15em] uppercase hover:bg-orange transition-colors"
-              >
-                Enquire About This Product
-              </Link>
-              <a
-                href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}
-                className="inline-flex items-center justify-center px-7 py-3 border border-ink text-ink text-xs tracking-[0.15em] uppercase hover:bg-ink hover:text-ivory transition-colors"
-              >
-                Call {siteConfig.phoneDisplay}
-              </a>
-            </div>
-
-            <div className="mt-8 p-4 border border-taupe/15">
-              <p className="text-xs text-ink/40 leading-relaxed">
-                For sizing, materials and wholesale pricing, please contact us
-                directly. We&apos;re happy to discuss your requirements.
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* Interactive Product Layout (Image, Colors, Sizes, Fabric) */}
+        <Suspense fallback={<div className="min-h-[500px] flex items-center justify-center text-ink/40">Loading product details...</div>}>
+          <ProductDetailClient product={product} />
+        </Suspense>
 
         {/* Related products */}
         {related.length > 0 && (
