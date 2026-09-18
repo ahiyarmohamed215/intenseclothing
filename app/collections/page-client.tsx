@@ -74,8 +74,8 @@ export default function CollectionsPage() {
     }
     if (search.trim()) {
       const q = search.toLowerCase().trim();
-      result = result.filter((v) => 
-        v.baseProduct.name.toLowerCase().includes(q) || 
+      result = result.filter((v) =>
+        v.baseProduct.name.toLowerCase().includes(q) ||
         v.colorName.toLowerCase().includes(q)
       );
     }
@@ -136,11 +136,10 @@ export default function CollectionsPage() {
                   role="tab"
                   aria-selected={activeCategory === cat}
                   onClick={() => handleCategoryChange(cat)}
-                  className={`px-4 py-2 text-xs tracking-[0.1em] uppercase transition-all duration-200 ${
-                    activeCategory === cat
+                  className={`px-4 py-2 text-xs tracking-[0.1em] uppercase transition-all duration-200 ${activeCategory === cat
                       ? 'bg-ink text-ivory'
                       : 'bg-transparent text-ink/60 hover:text-ink border border-taupe/20 hover:border-ink/50'
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -178,11 +177,10 @@ export default function CollectionsPage() {
                 <button
                   key={style}
                   onClick={() => handleStyleChange(style)}
-                  className={`px-3 py-1.5 text-[11px] tracking-wider transition-all duration-200 rounded-full border ${
-                    activeStyle === style
+                  className={`px-3 py-1.5 text-[11px] tracking-wider transition-all duration-200 rounded-full border ${activeStyle === style
                       ? 'bg-ink/5 text-ink border-ink/20 font-medium'
                       : 'bg-transparent text-ink/50 hover:text-ink border-transparent hover:border-taupe/20'
-                  }`}
+                    }`}
                 >
                   {style === 'All' ? 'All Styles' : style}
                 </button>
@@ -204,8 +202,8 @@ export default function CollectionsPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
             {filteredVariants.map((variant) => (
               <div key={variant.id} className="animate-fade-in">
-                <ProductCard 
-                  product={variant.baseProduct} 
+                <ProductCard
+                  product={variant.baseProduct}
                   variantColor={variant.colorName}
                   variantImage={variant.image}
                 />
